@@ -88,6 +88,13 @@ playBtn.addEventListener("click", () => {
 
     //! Attendo il click della singola cella
     cells.addEventListener("click", () => {
+      //# Controllo che il punteggio corrente sia inferiore al punteggio massimo
+      if (score === maxScore) {
+        console.log("HAI VINTO!!!!!!!!!!!!");
+        console.log("Il tuo punteggio è di " + score + " Punti");
+        return;
+      } else if (gameOver) return;
+
       //* Mi salvo il numero della casella cliccata
       textOfCells = parseInt(cells.innerText);
       console.log(textOfCells);
@@ -98,6 +105,9 @@ playBtn.addEventListener("click", () => {
         cells.classList.add("bomb");
         //? Determino che il gioco è finito
         gameOver = true;
+        console.log("GAME OVER...");
+        console.log("Il tuo punteggio è di " + score + " Punti");
+
         //? Fermo il conteggio e lo decremento per non contare la casella della bomba
         --score;
       }
@@ -108,22 +118,6 @@ playBtn.addEventListener("click", () => {
         cells.classList.add("clicked");
         //? Incremento il punteggio
         scoreElement.innerText = ++score;
-      }
-
-      //# Controllo che il punteggio corrente sia inferiore al punteggio massimo
-      if (score === maxScore) {
-        youWin = true;
-      }
-
-      //# Controllo il FLAG del fine partita
-      if (youWin) {
-        console.log("HAI VINTO!!!!!!!!!!!!");
-        console.log("Il tuo punteggio è di " + score + " Punti");
-        return;
-      } else if (gameOver) {
-        console.log("GAME OVER...");
-        console.log("Il tuo punteggio è di " + score + " Punti");
-        return;
       }
     });
 
