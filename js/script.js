@@ -10,6 +10,7 @@ const scoreElement = document.getElementById("score");
 //# Variabili
 let numberOfCells;
 let levelClass;
+let textOfCells;
 
 //# Funzioni
 //* Funzione che crea una singola cella
@@ -65,20 +66,32 @@ playBtn.addEventListener("click", () => {
   }
 
   //# BOMB
+  const bombList = bomb(numberOfCells);
   //* Stampo in console l'Array di bombe casuali
-  console.log(bomb(numberOfCells));
+  console.log(bombList);
 
   //# Ciclo per inserire tutte e 100 le celle
   for (let i = 1; i <= numberOfCells; i++) {
     const cells = createCell(i);
     cells.classList.add(levelClass);
+
+    //# Attendo il click della singola cella
     cells.addEventListener("click", () => {
+      //* Mi salvo il numero della casella cliccata
+      textOfCells = parseInt(cells.innerText);
+      console.log(textOfCells);
+
+      //* Controllo per non far incrementare il punteggio se la casella è gia cliccata
       if (!cells.classList.contains("clicked")) {
+        //* Aggiugno la classe per far capire che la casella è cliccata
+        cells.classList.add("clicked");
         scoreElement.innerText = ++score;
       }
-      cells.classList.add("clicked");
 
-      console.log(i);
+      if (bombList.includes(textOfCells)) {
+        cells.classList.add("bomb");
+        alert("GAME OVER " + "Il tuo punteggio è " + score);
+      }
     });
     gridElement.appendChild(cells);
   }

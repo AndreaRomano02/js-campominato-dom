@@ -33,6 +33,11 @@ main{
   background-color: green;
 }
 
+.cell.clicked.bomb{
+  background-color: red;
+  color: white;
+}
+
 /** Difficuties */
 .cell.easy{
   width: calc(100% / 10);
