@@ -13,11 +13,24 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- JavaScript link -->
   <script defer src="js/script.js"></script>
-  <title>Name</title>
+  <title>Campo Fiorito</title>
 </head>
 
 <body>
-
+  <header class="p-3 d-flex justify-content-between">
+    <h1>Campo Minato</h1>
+    <div>
+      <select id="level" class="rounded-3 me-4">
+        <option value="1">Easy</option>
+        <option value="2">Medium</option>
+        <option value="3">Hard</option>
+      </select>
+      <button type="button" id="play-button" class="btn btn-secondary rounded-3 px-5">play</button>
+    </div>
+  </header>
+  <main>
+    <div id="grid"></div>
+  </main>
 </body>
 
 </html>

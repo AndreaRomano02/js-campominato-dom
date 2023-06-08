@@ -1,0 +1,50 @@
+/** Header */
+header{
+  height: 80px;
+}
+
+/** Main */
+main{
+  height: calc(100vh - 80px);
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#grid{
+  display: flex;
+  flex-wrap: wrap;
+  height: 70vh;
+  width: 70vh;
+}
+
+.cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cell.clicked{
+  background-color: green;
+}
+
+/** Difficuties */
+.cell.easy{
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+}
+
+.cell.medium{
+  width: calc(100% / 9);
+  height: calc(100% / 9);
+}
+
+.cell.hard{
+  width: calc(100% / 7);
+  height: calc(100% / 7);
+}
