@@ -30,3 +30,9 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
 
 3.  - **SE** Il numero della cella cliccata è uguale ad un numero dell'Array della bomba
       - Aggiungo la classe 'bomb' a alla casella e scrivo in console che la partita è terminata.
+
+4.  - Determino il punteggio massimo per ogni livello.
+    - Creo un FLAG 'GAME OVER'
+    - **SE** Se il flag da vero allora la partita finisce
+    - **SE** Il nostro punteggio è uguale al numero delle caselle - il numero delle bombe.
+      - FLAG = VERO;

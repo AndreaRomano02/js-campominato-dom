@@ -1,6 +1,7 @@
 console.log("JS OK");
-
+//# -------------------------------------------------------------
 //# PRELIMINARI
+//# -------------------------------------------------------------
 //* Recupero gli elementi dal DOM
 const playBtn = document.getElementById("play-button");
 const gridElement = document.getElementById("grid");
@@ -38,13 +39,20 @@ const bomb = (numberOfCells) => {
   return bombs;
 };
 
+//? -------------------------------------------------------------
+//? LOGICA EFFETTIVA
+//? -------------------------------------------------------------
 //! Attendo il click del bottone
 playBtn.addEventListener("click", () => {
-  //* Prima di tutto pulisco la griglia.
+  //! Prima di tutto pulisco la griglia.
   gridElement.innerHTML = "";
 
-  //* Stampo il punteggio iniziale che sicuramente è 0
+  //# Reset variabili
+  let gameOver = false;
+  let youWin = false;
   let score = 0;
+
+  //# Stampo il punteggio iniziale che sicuramente è 0
   scoreElement.innerText = score;
 
   //# Recupero il valore della select
@@ -65,6 +73,9 @@ playBtn.addEventListener("click", () => {
     numberOfCells = 49;
   }
 
+  //# Dichiaro il numero massimo del punteggiop
+  const maxScore = numberOfCells - 16;
+
   //# BOMB
   const bombList = bomb(numberOfCells);
   //* Stampo in console l'Array di bombe casuali
@@ -75,24 +86,48 @@ playBtn.addEventListener("click", () => {
     const cells = createCell(i);
     cells.classList.add(levelClass);
 
-    //# Attendo il click della singola cella
+    //! Attendo il click della singola cella
     cells.addEventListener("click", () => {
       //* Mi salvo il numero della casella cliccata
       textOfCells = parseInt(cells.innerText);
       console.log(textOfCells);
 
-      //* Controllo per non far incrementare il punteggio se la casella è gia cliccata
+      //* Controllo se il numero della cella cliccata è una bomba
+      if (bombList.includes(textOfCells)) {
+        //? Aggiungo la classe per mostrare la bomba
+        cells.classList.add("bomb");
+        //? Determino che il gioco è finito
+        gameOver = true;
+        //? Fermo il conteggio e lo decremento per non contare la casella della bomba
+        --score;
+      }
+
+      //* Se non ha la classe 'Clicked' l'aggiungo e incremento il punteggio
       if (!cells.classList.contains("clicked")) {
-        //* Aggiugno la classe per far capire che la casella è cliccata
+        //? Aggiugno la classe per far capire che la casella è cliccata
         cells.classList.add("clicked");
+        //? Incremento il punteggio
         scoreElement.innerText = ++score;
       }
 
-      if (bombList.includes(textOfCells)) {
-        cells.classList.add("bomb");
-        alert("GAME OVER " + "Il tuo punteggio è " + score);
+      //# Controllo che il punteggio corrente sia inferiore al punteggio massimo
+      if (score === maxScore) {
+        youWin = true;
+      }
+
+      //# Controllo il FLAG del fine partita
+      if (youWin) {
+        console.log("HAI VINTO!!!!!!!!!!!!");
+        console.log("Il tuo punteggio è di " + score + " Punti");
+        return;
+      } else if (gameOver) {
+        console.log("GAME OVER...");
+        console.log("Il tuo punteggio è di " + score + " Punti");
+        return;
       }
     });
+
+    //# Inserisco tutti gli elementi nel DOM
     gridElement.appendChild(cells);
   }
 });
