@@ -27,3 +27,6 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
   - **Fintanto che** esce un doppione
     - Randomizza un numero
 - Inserisci il numero nell'Array
+
+3.  - **SE** Il numero della cella cliccata è uguale ad un numero dell'Array della bomba
+      - Aggiungo la classe 'bomb' a alla casella e scrivo in console che la partita è terminata.
