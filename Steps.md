@@ -18,3 +18,12 @@ Al termine della partita, il software deve comunicare il punteggio, cioè il num
       - **SE** Non è stata cliccata
         - Incremento la variabile e la stampo in pagina.
       - **ALTRIMENTI** Interrompo e vado avanti.
+
+<br >
+
+2.  - Inizializzo un Array vuoto dove andrò ad inserire man mano i numeri randomici compresi da 1 alla quantita delle celle che varia in base alla difficoltà.
+
+- **Fintanto che** l'Array ha meno di 16 numeri allora
+  - **Fintanto che** esce un doppione
+    - Randomizza un numero
+- Inserisci il numero nell'Array
