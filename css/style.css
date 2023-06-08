@@ -5,8 +5,10 @@ header{
 
 /** Main */
 main{
-  height: calc(100vh - 80px);
   background-color: aquamarine;
+  height: calc(100vh - 80px);
+}
+.contenitore{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +19,7 @@ main{
   flex-wrap: wrap;
   height: 70vh;
   width: 70vh;
+  margin-top: 50px;
 }
 
 .cell{

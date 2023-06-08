@@ -7,6 +7,7 @@ const playBtn = document.getElementById("play-button");
 const gridElement = document.getElementById("grid");
 const selectElement = document.getElementById("level");
 const scoreElement = document.getElementById("score");
+const clickToShow = document.getElementById("click-to-show");
 
 //# Variabili
 let numberOfCells;
@@ -51,6 +52,8 @@ playBtn.addEventListener("click", () => {
   let gameOver = false;
   let youWin = false;
   let score = 0;
+  let message;
+  clickToShow.innerHTML = "";
 
   //# Stampo il punteggio iniziale che sicuramente è 0
   scoreElement.innerText = score;
@@ -90,10 +93,17 @@ playBtn.addEventListener("click", () => {
     cells.addEventListener("click", () => {
       //# Controllo che il punteggio corrente sia inferiore al punteggio massimo
       if (score === maxScore) {
-        console.log("HAI VINTO!!!!!!!!!!!!");
-        console.log("Il tuo punteggio è di " + score + " Punti");
+        message = `HAI VINTO!!!!!! Il tuo punteggio è di ${score} punti`;
+        clickToShow.innerText += message;
         return;
-      } else if (gameOver) return;
+      } else if (gameOver) {
+        //* Mostro tutte le altre caselle
+        for (let i = 0; i < cellsElement.length; i++) {
+          if (bombList.includes(i + 1))
+            cellsElement[i].classList.add("clicked", "bomb");
+        }
+        return;
+      }
 
       //* Mi salvo il numero della casella cliccata
       textOfCells = parseInt(cells.innerText);
@@ -105,8 +115,11 @@ playBtn.addEventListener("click", () => {
         cells.classList.add("bomb");
         //? Determino che il gioco è finito
         gameOver = true;
-        console.log("GAME OVER...");
-        console.log("Il tuo punteggio è di " + score + " Punti");
+        message = `HAI PERSO :( ...       Il tuo punteggio è di ${score} punti`;
+        clickToShow.innerHTML = `<div class="card bg-danger p-0 m-0">
+        <h1>${message}</h1>
+        <h2>Clicca sulla griglia per mostrare la posizione delle altre bombe.</h2>
+        </div>`;
 
         //? Fermo il conteggio e lo decremento per non contare la casella della bomba
         --score;
@@ -124,4 +137,5 @@ playBtn.addEventListener("click", () => {
     //# Inserisco tutti gli elementi nel DOM
     gridElement.appendChild(cells);
   }
+  const cellsElement = document.querySelectorAll(".cell");
 });
