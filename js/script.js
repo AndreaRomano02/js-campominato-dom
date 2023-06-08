@@ -20,6 +20,23 @@ const createCell = (number) => {
   return cell;
 };
 
+//* Funzione per il random
+const random = (max) => Math.floor(Math.random() * max) + 1;
+
+//* Funzione per creare l'Array delle bombe
+const bomb = (numberOfCells) => {
+  const bombs = [];
+  let number;
+  while (bombs.length < 16) {
+    do {
+      number = random(numberOfCells);
+    } while (bombs.includes(number));
+    bombs.push(number);
+  }
+
+  return bombs;
+};
+
 //! Attendo il click del bottone
 playBtn.addEventListener("click", () => {
   //* Prima di tutto pulisco la griglia.
@@ -46,6 +63,10 @@ playBtn.addEventListener("click", () => {
     levelClass = "hard";
     numberOfCells = 49;
   }
+
+  //# BOMB
+  //* Stampo in console l'Array di bombe casuali
+  console.log(bomb(numberOfCells));
 
   //# Ciclo per inserire tutte e 100 le celle
   for (let i = 1; i <= numberOfCells; i++) {
